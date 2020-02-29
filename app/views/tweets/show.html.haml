@@ -18,7 +18,11 @@
       %br
       = "today:#{@tweet.time}h"
       %br
+<<<<<<< Updated upstream
       = "残り: xxxh"
+=======
+      -# = "残り: #{20 - @tweet.time }[h]"
+>>>>>>> Stashed changes
   .container
     - if current_user
       = form_with(model: [@tweet, @comment], local: true) do |form|

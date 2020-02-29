@@ -70,4 +70,12 @@ gem 'jquery-rails'
 gem 'devise'
 gem 'omniauth'
 gem 'omniauth-twitter'
+<<<<<<< Updated upstream
 gem 'kaminari'
+=======
+gem 'kaminari'
+gem 'jquery-rails'
+
+gem "chartkick"
+gem 'groupdate'
+>>>>>>> Stashed changes

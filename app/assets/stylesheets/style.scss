@@ -619,12 +619,124 @@ footer {
   }
 }
 
+<<<<<<< Updated upstream
 .search-form {
   text-align: center;
   padding-top: 32px;
   .search-input {
     width: 30%;
     margin-right: 10px;
+=======
+
+
+
+
+.cp_tab *, .cp_tab *:before, .cp_tab *:after {
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
+}
+.cp_tab {
+	margin: 1em auto;
+}
+.cp_tab > input[type='radio'] {
+	margin: 0;
+	padding: 0;
+	border: none;
+	border-radius: 0;
+	outline: none;
+	background: none;
+	-webkit-appearance: none;
+	        appearance: none;
+  display: none;
+  
+}
+.cp_tab .cp_tabpanel {
+  display: none;
+  span{
+    color: white;
+  }
+}
+.cp_tab > input:first-child:checked ~ .cp_tabpanels > .cp_tabpanel:first-child,
+.cp_tab > input:nth-child(3):checked ~ .cp_tabpanels > .cp_tabpanel:nth-child(2),
+.cp_tab > input:nth-child(5):checked ~ .cp_tabpanels > .cp_tabpanel:nth-child(3),
+.cp_tab > input:nth-child(7):checked ~ .cp_tabpanels > .cp_tabpanel:nth-child(4),
+.cp_tab > input:nth-child(9):checked ~ .cp_tabpanels > .cp_tabpanel:nth-child(5),
+.cp_tab > input:nth-child(11):checked ~ .cp_tabpanels > .cp_tabpanel:nth-child(6) {
+  display: block;
+  color: white;
+  
+}
+.cp_tab > label {
+	position: relative;
+	display: inline-block;
+	padding: 15px;
+	cursor: pointer;
+	border: 1px solid transparent;
+  border-bottom: 0;
+  color: white;
+}
+.cp_tab > label:hover,
+.cp_tab > input:focus + label {
+	color: #0066cc;
+}
+.cp_tab > input:checked + label {
+	margin-bottom: -1px;
+	border-color: #cccccc;
+	border-bottom: 1px solid #ffffff;/*背景色と同じ*/
+	border-radius: 6px 6px 0 0;
+}
+.cp_tab .cp_tabpanel {
+	padding: 0.5em 1em;
+	border-top: 1px solid #cccccc;
+}
+@media (max-width: 480px) {
+	.cp_tab {
+		width: 100%;
+		font-size: 0.8em;
+	}
+	.cp_tab label {
+		padding: 0.5em;
+	}
+}
+
+.content_post-user {
+  margin: 10px;
+  padding: 30px;
+  position: relative;
+  height: 200px;
+  color: #fff;
+  background-size: cover;
+  background-position: center center;
+  border-radius: 3px;
+  box-shadow: 0 0 10px rgba(#292929,0.2);
+  &:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    @include filter-gradient(#000000, #a60000, vertical);
+    @include background-image(linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0) 62%,rgba(0,0,0,0.85) 100%));
+    z-index: 1;
+    border-radius: 3px;
+  }
+
+  .text {
+    z-index: 2;
+    position: absolute;
+    bottom:10px;
+    left: 10px;
+    font-size: 12px;
+    text-transform: lowercase;
+  }
+
+  .tag_index {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+>>>>>>> Stashed changes
   }
 
   .search-btn {
@@ -632,3 +744,102 @@ footer {
   }
 }
 
+<<<<<<< Updated upstream
+=======
+
+  p {
+    @extend .serif;
+    position: absolute;
+    left: 30px;
+    margin: 0;
+    font-size: 20px;
+    z-index: 2;
+    font-weight: bold;
+    text-shadow: 0 0 2px #000, 0 0 1px #000, 0 0 1px #000;
+  }
+  span.name {
+    position: absolute;
+    right: 20px;
+    bottom: 10px;
+    width: 50px;
+    z-index: 2;
+    font-size: 13px;
+    a {
+      display: block;
+      color: #aaa;
+      &:hover {
+        text-decoration: underline;
+        color: #aaa;
+      }
+    }
+    span {
+      font-size: 9px;
+      display: block;
+    }
+  }
+}
+
+
+
+
+
+@mixin circle($size) {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  left: calc(50% - #{$size/2});
+  top: calc(50% - #{$size/2});
+  width: $size;
+  height: $size;
+}
+
+$size: 200px;
+.progress-pie-chart {
+  width: $size;
+  height: $size;
+  border-radius: 50%;
+  background-color: #E5E5E5;
+  position: relative;
+  &.gt-50 {
+    background-color: #81CE97;
+  }
+}
+.ppc-progress {
+  @include circle($size);
+  clip: rect(0, $size, $size, #{$size/2});
+  .ppc-progress-fill {
+    @include circle($size);
+    clip: rect(0, #{$size/2}, $size, 0);
+    background: #81CE97;
+    transform: rotate(60deg);
+  }
+  .gt-50 & {
+    clip: rect(0, #{$size/2}, $size, 0);
+    .ppc-progress-fill {
+      clip: rect(0, $size, $size, #{$size/2});
+      background: #E5E5E5;
+    }
+  }
+}
+.ppc-percents {
+  @include circle(#{$size/1.15});
+  background: #fff;
+  text-align: center;
+  display: table;
+  span {
+    display: block;
+    font-size: 2.6em;
+    font-weight: bold;
+    color: #81CE97;
+  }
+}
+.pcc-percents-wrapper {
+  display: table-cell;
+  vertical-align: middle;
+  color: #81CE97;
+}
+
+.progress-pie-chart {
+  margin: 50px auto 0;
+}
+>>>>>>> Stashed changes

@@ -3,7 +3,94 @@
     = @name 
     さんの投稿一覧
 .contents.row
+<<<<<<< Updated upstream
   - @tweets.each do |tweet|
     = render partial: "tweets/tweet", locals: { tweet: tweet}
 .contents.row.initial
   = paginate(@tweets)
+=======
+  .cp_tab
+    %input#tab1_1{"aria-controls" => "first_tab01", :checked => "checked", :name => "cp_tab", :type => "radio"}/
+    %label{:for => "tab1_1"} 自分の達成率
+    %input#tab1_2{"aria-controls" => "second_tab01", :name => "cp_tab", :type => "radio"}/
+    %label{:for => "tab1_2"} お気に入り
+    %input#tab1_3{"aria-controls" => "third_tab01", :name => "cp_tab", :type => "radio"}/
+    %label{:for => "tab1_3"} フォロー
+    %input#tab1_4{"aria-controls" => "force_tab01", :name => "cp_tab", :type => "radio"}/
+    %label{:for => "tab1_4"} フォロワー
+    .cp_tabpanels
+      -# 自分の投稿
+      #first_tab01.cp_tabpanel
+        - @tweets.each do |key, value|
+          #{key}
+          .progress-pie-chart{"data-percent" => "value / 20 * 100"}
+            .ppc-progress
+              .ppc-progress-fill
+            .ppc-percents
+              .pcc-percents-wrapper
+                〜〜 %
+                %br
+                未完成
+        <Totalコミット時間>
+        = line_chart @mytimes, min: 0, max: 20, width: "600px", height: "300px", colors: ["white", "#fff"]
+
+
+
+
+
+
+
+      -# お気に入り
+      #second_tab01.cp_tabpanel
+        - @favorite_tweets.each do |favorite| 
+          .content_post-user{:style => "background-image: url(#{favorite.image});"}
+            .my_tag
+              = favorite.tag.tag_name
+            .more
+              %span= image_tag 'arrow_top.png'
+              %ul.more_list
+                %li
+                  = link_to '詳細', "/tweets/#{favorite.id}", method: :get
+                - if user_signed_in? && current_user.id == favorite.user_id
+                  %li
+                    = link_to '編集', "/tweets/#{favorite.id}/edit", method: :get
+                  %li 
+                    = link_to '削除', "/tweets/#{favorite.id}", method: :delete
+            %br
+            .last_time
+              = favorite.time
+              h 
+            %br
+            .last_bar
+              20h
+            %span.name 
+              %a{:href => "/users/#{favorite.user.id}"}
+                = favorite.user.name
+      -# フォロー
+      #third_tab01.cp_tabpanel
+        - @fallow_users.each do |user|
+          
+          %p
+            %span Name:
+            = link_to "#{user.name}さん", user_path(user.id)
+          - if current_user != user
+            - if user.followed_by?(current_user)
+              %p= link_to "フォロー済み", user_relationships_path(user.id), method: :delete
+            - else
+              %p= link_to "フォローする", user_relationships_path(user.id), method: :post
+          %hr/
+      -# フォロワー
+      #force_tab01.cp_tabpanel
+        - @follower_users.each do |user|
+          %p
+            %span Name:
+            = link_to "#{user.name}さん", user_path(user.id)
+          - if current_user != user
+            - if user.followed_by?(current_user)
+              %p= link_to "フォロー済み", user_relationships_path(user.id), method: :delete
+            - else
+              %p= link_to "フォローする", user_relationships_path(user.id), method: :post
+          %hr/
+
+
+>>>>>>> Stashed changes
