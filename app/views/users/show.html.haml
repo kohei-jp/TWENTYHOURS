@@ -9,6 +9,13 @@
         %p= link_to "フォローする", user_relationships_path(@user.id), method: :post
 
 .contents.row
+  - @tweets.each do |tweet|
+    = render partial: "tweets/tweet", locals: { tweet: tweet}
+.contents.row.initial
+  = paginate(@tweets)
+  .cp_tab
+    %input#tab1_1{"aria-controls" => "first_tab01", :checked => "checked", :name => "cp_tab", :type => "radio"}/
+    %label{:for => "tab1_1"} 自分の達成率
   .cp_tab
     %input#tab1_1{"aria-controls" => "first_tab01", :checked => "checked", :name => "cp_tab", :type => "radio"}/
     %label{:for => "tab1_1"} 自分の投稿
@@ -21,6 +28,22 @@
     .cp_tabpanels
       -# 自分の投稿
       #first_tab01.cp_tabpanel
+        - @tweets.each do |key, value|
+          #{key}
+          .progress-pie-chart{"data-percent" => "value / 20 * 100"}
+            .ppc-progress
+              .ppc-progress-fill
+            .ppc-percents
+              .pcc-percents-wrapper
+                〜〜 %
+                %br
+                未完成
+        <Totalコミット時間>
+        = line_chart @mytimes, min: 0, max: 20, width: "600px", height: "300px", colors: ["white", "#fff"]
+
+      -# お気に入り
+      #second_tab01.cp_tabpanel
+        - @favorite_tweets.each do |favorite| 
         - @tweets.each do |tweet| 
           .content_post-user{:style => "background-image: url(#{tweet.image});"}
             .my_tag
@@ -59,7 +82,8 @@
                     = link_to '削除', "/tweets/#{favorite.id}", method: :delete
             %br
             .last_time
-              = time[1] 
+              = favorite.time
+              -# = time[1] 
               h 
             %br
             .last_bar
@@ -92,5 +116,3 @@
             - else
               %p= link_to "フォローする", user_relationships_path(user.id), method: :post
           %hr/
-
-

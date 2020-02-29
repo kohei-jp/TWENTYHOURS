@@ -25,3 +25,6 @@
           = f.password_field :password_confirmation, autocomplete: "off"
         .actions
           = f.submit "Sign up"
+
+        = link_to "login" ,"/auth/twitter", method: :post
+

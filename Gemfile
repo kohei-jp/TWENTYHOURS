@@ -71,5 +71,12 @@ gem 'jquery-rails'
 gem 'devise'
 gem 'omniauth'
 gem 'omniauth-twitter'
+
+# グラフ
+gem "chartkick"
+gem 'groupdate'
+
 gem 'kaminari'
-gem 'jquery-rails'
+gem 'dotenv-rails'
+gem "omniauth-rails_csrf_protection"
+

@@ -23,7 +23,6 @@
       .name 
         - if user_signed_in?
           - if tweet.favorited_by?(current_user)
-            / ログインしているユーザーがファボしたかどうかで分岐
             .fav
               %span いいね解除:
               = link_to tweet.favorites.count, tweet_favorites_path(tweet.id), method: :delete
@@ -58,7 +57,6 @@
       - subject = array[1]
       ・"#{name}さんは "#{subject}" を合計#{hour}時間勉強しました。残り"#{ 20 - hour}時間"で取得です！"
       %br
-
 
 .contents.row.initial
   = paginate(@tweets)

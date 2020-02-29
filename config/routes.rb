@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
-<<<<<<< Updated upstream
-  devise_for :users
+
   root  'tops#index'
   namespace :tweets do
     resources :searches, only: :index
@@ -17,11 +16,16 @@ Rails.application.routes.draw do
     get :follows, on: :member # 追加
     get :followers, on: :member # 追加
   end
+
   #======================================
-=======
-  root "home#index"
-  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
+  
   root to: 'tweets#index'
   resources :tweets
->>>>>>> Stashed changes
+
+  resources :users, only: :show
+
+  get '/auth/:provider/callback', to: 'sessions#create'
+  get '/logout', to: 'sessions#destroy'
+  get '/login', to: 'homes#login'
+
 end
