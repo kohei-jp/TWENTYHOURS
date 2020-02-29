@@ -296,4 +296,6 @@ Devise.setup do |config|
   # When set to false, does not sign a user in automatically after their password is
   # changed. Defaults to true, so a user is signed in automatically after changing a password.
   # config.sign_in_after_change_password = true
+  config.omniauth :twitter, ENV['API_KEY'], ENV['API_SECRET'],
+  callback_url:"各々のAPI取得時に設定したcallback_url"
 end

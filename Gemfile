@@ -71,6 +71,7 @@ gem 'devise'
 gem 'omniauth'
 gem 'omniauth-twitter'
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 gem 'kaminari'
 =======
 gem 'kaminari'
@@ -78,4 +79,9 @@ gem 'jquery-rails'
 
 gem "chartkick"
 gem 'groupdate'
+>>>>>>> Stashed changes
+=======
+gem 'kaminari'
+gem 'dotenv-rails'
+gem "omniauth-rails_csrf_protection"
 >>>>>>> Stashed changes
