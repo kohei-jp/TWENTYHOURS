@@ -1,11 +1,11 @@
-.contents.row.initial
+.search-bar
   %p.user_page
     = "Everybady commit"
+  = form_with(url: tweets_searches_path, local: true, method: :get, class: "search-form") do |form|
+    = form.text_field :keyword, placeholder: "投稿を検索する", class: "search-input"
+    = form.submit "検索", class: "search-btn"
 .contents.row
   - @tweets.each do |tweet| 
-<<<<<<< Updated upstream
-    = render partial: "tweet", locals: { tweet: tweet}
-=======
     -# = render partial: "tweet", locals: { tweet: tweet}
     .content_post.wow.bounce{:style => "background-image: url(#{tweet.image});"}
       .tag_index
@@ -58,7 +58,5 @@
       ・"#{name}さんは "#{subject}" を合計#{hour}時間勉強しました。残り"#{ 20 - hour}時間"で取得です！"
       %br
 
-
->>>>>>> Stashed changes
 .contents.row.initial
   = paginate(@tweets)

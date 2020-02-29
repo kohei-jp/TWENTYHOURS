@@ -50,6 +50,7 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem 'rails-erd'
 end
 
 group :test do
@@ -70,18 +71,12 @@ gem 'jquery-rails'
 gem 'devise'
 gem 'omniauth'
 gem 'omniauth-twitter'
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-gem 'kaminari'
-=======
-gem 'kaminari'
-gem 'jquery-rails'
 
+# グラフ
 gem "chartkick"
 gem 'groupdate'
->>>>>>> Stashed changes
-=======
+
 gem 'kaminari'
 gem 'dotenv-rails'
 gem "omniauth-rails_csrf_protection"
->>>>>>> Stashed changes
+

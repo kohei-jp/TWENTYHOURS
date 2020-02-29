@@ -1,17 +1,25 @@
 class TweetsController < ApplicationController
   before_action :set_tweet, only: [:edit, :show]
-  before_action :move_to_index, except: [:index, :show]
+  before_action :move_to_index, except: [:index, :show, :search]
 
   def index
-    @tweets = Tweet.includes(:user).order("created_at DESC").page(params[:page]).per(9)
+    @tweets = Tweet.includes(:user, :tag).order("created_at DESC").page(params[:page]).per(9)
+    @times = Tweet.joins(:tag, :user).group('name').group('tag_name').sum(:time)
   end
 
   def new
     @tweet = Tweet.new
+    @tweet.build_tag
   end
 
+
   def create
-    Tweet.create(tweet_params)
+    @tweet = Tweet.new(tweet_params)
+    if @tweet.save
+      redirect_to tweets_path
+    else
+      render action: :new
+    end
   end
 
   def edit
@@ -30,11 +38,12 @@ class TweetsController < ApplicationController
   def show
     @comment = Comment.new
     @comments = @tweet.comments.includes(:user)
+    @tag = @tweet.tag
   end
 
   private
   def tweet_params
-    params.require(:tweet).permit(:image, :text, :time).merge(user_id: current_user.id)
+    params.require(:tweet).permit(:image, :text, :time, tag_attributes: [:tag_name]).merge(user_id: current_user.id)
   end
 
   def set_tweet

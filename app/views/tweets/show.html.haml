@@ -1,5 +1,7 @@
 .contents_show.row
   .content_post_show.wow.bounce{:style => "background-image: url(#{@tweet.image});"}
+    %span.tag 
+      = @tag.tag_name
     .more_show
       %span= image_tag 'arrow_top.png'
       %ul.more_list_show
@@ -18,16 +20,11 @@
       %br
       = "today:#{@tweet.time}h"
       %br
-<<<<<<< Updated upstream
-      = "残り: xxxh"
-=======
-      -# = "残り: #{20 - @tweet.time }[h]"
->>>>>>> Stashed changes
   .container
     - if current_user
-      = form_with(model: [@tweet, @comment], local: true) do |form|
-        = form.text_area :text, placeholder: "コメントする", row: "2"
-        = form.submit "SEND"
+      = form_with(model: [@tweet, @comment], local: true, id: "new_comment") do |form|
+        = form.text_area :text, placeholder: "コメントする", rows: "2", class: "textbox"
+        = form.submit "SEND", class: "form__submit"
     - else
       %strong
         %p ***コメントの投稿には新規登録/ログインが必要です。***

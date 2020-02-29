@@ -1,17 +1,24 @@
 .contents.row.initial
-  %p.user_page
-    = @name 
-    さんの投稿一覧
+  .user_page
+    %p= "#{@name}さんのスキル一覧"
+  .select_follow
+    - if current_user != @user
+      - if @user.followed_by?(current_user)
+        %p= link_to "フォロー済み", user_relationships_path(@user.id), method: :delete
+      - else
+        %p= link_to "フォローする", user_relationships_path(@user.id), method: :post
+
 .contents.row
-<<<<<<< Updated upstream
   - @tweets.each do |tweet|
     = render partial: "tweets/tweet", locals: { tweet: tweet}
 .contents.row.initial
   = paginate(@tweets)
-=======
   .cp_tab
     %input#tab1_1{"aria-controls" => "first_tab01", :checked => "checked", :name => "cp_tab", :type => "radio"}/
     %label{:for => "tab1_1"} 自分の達成率
+  .cp_tab
+    %input#tab1_1{"aria-controls" => "first_tab01", :checked => "checked", :name => "cp_tab", :type => "radio"}/
+    %label{:for => "tab1_1"} 自分の投稿
     %input#tab1_2{"aria-controls" => "second_tab01", :name => "cp_tab", :type => "radio"}/
     %label{:for => "tab1_2"} お気に入り
     %input#tab1_3{"aria-controls" => "third_tab01", :name => "cp_tab", :type => "radio"}/
@@ -34,15 +41,32 @@
         <Totalコミット時間>
         = line_chart @mytimes, min: 0, max: 20, width: "600px", height: "300px", colors: ["white", "#fff"]
 
-
-
-
-
-
-
       -# お気に入り
       #second_tab01.cp_tabpanel
         - @favorite_tweets.each do |favorite| 
+        - @tweets.each do |tweet| 
+          .content_post-user{:style => "background-image: url(#{tweet.image});"}
+            .my_tag
+              = tweet.tag.tag_name
+            .more
+              %span= image_tag 'arrow_top.png'
+              %ul.more_list
+                %li
+                  = link_to '詳細', "/tweets/#{tweet.id}", method: :get
+                - if user_signed_in? && current_user.id == tweet.user_id
+                  %li
+                    = link_to '編集', "/tweets/#{tweet.id}/edit", method: :get
+                  %li 
+                    = link_to '削除', "/tweets/#{tweet.id}", method: :delete
+            %br
+            .last_time
+              = "#{tweet.time}h"
+            %br
+            .last_bar
+              20h
+      -# お気に入り
+      #second_tab01.cp_tabpanel
+        - @favorite_tweets.zip(@times).each do |favorite,time| 
           .content_post-user{:style => "background-image: url(#{favorite.image});"}
             .my_tag
               = favorite.tag.tag_name
@@ -59,6 +83,7 @@
             %br
             .last_time
               = favorite.time
+              -# = time[1] 
               h 
             %br
             .last_bar
@@ -91,6 +116,3 @@
             - else
               %p= link_to "フォローする", user_relationships_path(user.id), method: :post
           %hr/
-
-
->>>>>>> Stashed changes

@@ -2,9 +2,6 @@ $("#menu li").hover(function() {
   $(this).children('ul').show();
 }, function() {
   $(this).children('ul').hide();
-<<<<<<< Updated upstream
-});
-=======
 });
 
 
@@ -20,4 +17,4 @@ $(function(){
 });
 
 
->>>>>>> Stashed changes
+

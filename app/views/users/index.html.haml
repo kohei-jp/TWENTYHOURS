@@ -1,0 +1,13 @@
+- @users.each do |user|
+  %hr/
+  %p
+    %span = user.name
+  %p
+    %span email:
+    = link_to user.email, user_path(user.id)
+  / ここを追加
+  - if current_user != user
+    - if user.followed_by?(current_user)
+      %p= link_to "フォロー済み", user_relationships_path(user.id), method: :delete
+    - else
+      %p= link_to "フォローする", user_relationships_path(user.id), method: :post

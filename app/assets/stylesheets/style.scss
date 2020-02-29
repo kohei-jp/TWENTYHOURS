@@ -1,11 +1,6 @@
 @import "compass";
+@import url("tops.scss");
 
-/*
- * "ほのか明朝" licensed under the IPA Font License Agreement v1.0
- * http://fontfree.me/966（配布元のURL）
- * http://ipafont.ipa.go.jp/（IPAフォントのURL）
- * http://ipafont.ipa.go.jp/ipa_font_license_v1.html（IPAフォントライセンスv1.0のURL）
- */
 @font-face {
     font-family: 'ほのか明朝';
     src: url('851H-kktt_004.ttf') format('truetype');
@@ -16,7 +11,6 @@
 @import url(http://fonts.googleapis.com/css?family=Unica+One);
 
 $accent: #57C3E9;
-$black: #292929;
 $dark: #666;
 $darkGray: #999999;
 $gray: #D8D8D8;
@@ -37,9 +31,9 @@ $white: white;
   margin: $margin;
 }
 
-body,html {
+body {
   height: 100%;
-  background-color: Gray;
+  background-color: $dark;
 }
 
 body {
@@ -58,7 +52,7 @@ line-height: 1.57;
 
 a {
   text-decoration: none;
-  color: $dark;
+  color: lightgray;
   // @extend .transition;
   &:hover {
     color: $accent;
@@ -81,16 +75,6 @@ a {
   background: $gray;
 }
 
-
-
-
-
-
-// .transition {
-//   @include transition-property(all);
-//   @include transition-duration(0.2s);
-//   @include transition-timing-function(linear);
-// }
 
 .btn-box {
   display: inline-block;
@@ -144,10 +128,6 @@ a {
 .title {
   font-weight: bold;
 }
-
-// .text {
-//   color: gray;
-// }
 
 .title--big {
   font-size: 1.5em;
@@ -231,7 +211,7 @@ header.header {
       border-right: 1px solid #d8d8d8;
       box-shadow: 1px 2px 5px rgba(0,0,0,0.1);
       li {
-        background-color: #f0f0f0;
+        background-color: black;
         a {
           display: block;
           padding: 10px 20px;
@@ -242,6 +222,7 @@ header.header {
      }
   }
 }
+
 .form {
   background: url(https://dl.dropboxusercontent.com/u/5840617/DeathtoStock_Wired3.jpg);
   background-size: cover;
@@ -260,14 +241,52 @@ header.header {
   }
 }
 
+.title{
+  margin-top: 20px;
+  margin-bottom: 20px;
+  color: white;
+}
 
+.attive{
+  background-color: black;
+  font-size: 14px;
+  height: 200px;
+  overflow: scroll;
+  width: 660px;
+  font-family: ほのか明朝;
+  color: #9ec34b;
+  white-space: nowrap;
+}
+
+/* スクロールの幅の設定 */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+/* スクロールの背景の設定 */
+::-webkit-scrollbar-track {
+  border-radius: 5px;
+  box-shadow: 0 0 4px #aaa inset;
+}
+
+/* スクロールのつまみ部分の設定 */
+::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background: #1959A8;
+}
 
 
 
 div.contents.row {
   display: flex;
   flex-wrap:wrap;/*回り込み有効化*/
-  
+  color : black;
+  position: relative;
+  .select_follow{
+    position: absolute;
+    right: 0;
+  }
   h2 {
     // @include boxBase(20px 0, 0);
     font-weight: normal;
@@ -280,6 +299,11 @@ div.contents.row {
   .new_user{
   font-family: "游ゴシック", "YuGothic";
   }
+
+  .user-show {
+    width: initial;
+  }
+
   .content_post {
     width: calc(100% / 3.4);/*3等分*/
     margin: 10px;
@@ -290,7 +314,7 @@ div.contents.row {
     background-size: cover;
     background-position: center center;
     border-radius: 3px;
-    box-shadow: 0 0 10px rgba($black,0.2);
+    box-shadow: 0 0 10px rgba(#292929,0.2);
     &:after {
       content: '';
       position: absolute;
@@ -303,6 +327,9 @@ div.contents.row {
       @include background-image(linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0) 62%,rgba(0,0,0,0.85) 100%));
       z-index: 1;
       border-radius: 3px;
+      .user-initial{
+        width: initial;
+      }
     }
 
     .text {
@@ -312,6 +339,12 @@ div.contents.row {
       left: 10px;
       font-size: 12px;
       text-transform: lowercase;
+    }
+
+    .tag_index {
+      position: absolute;
+      top: 10px;
+      left: 10px;
     }
 
     .more {
@@ -354,28 +387,28 @@ div.contents.row {
       }
     }
 
-
     p {
       @extend .serif;
       position: absolute;
       left: 30px;
-      // right: 100px;
-      // bottom: 30px;
       margin: 0;
       font-size: 20px;
       z-index: 2;
       font-weight: bold;
       text-shadow: 0 0 2px #000, 0 0 1px #000, 0 0 1px #000;
     }
-    span.name {
+    .name {
       position: absolute;
-      right: 20px;
+      right: 10px;
       bottom: 10px;
+      text-align: right;
       z-index: 2;
       font-size: 13px;
+
       a {
         display: block;
-        color: #aaa;
+        font-size: 9px;
+        color: white;
         &:hover {
           text-decoration: underline;
           color: #aaa;
@@ -388,12 +421,11 @@ div.contents.row {
     }
   }
   .success {
-    // @include boxBase(20px 0 ,30px);
     text-align: center;
     margin: 50px auto;
     padding: 120px;
 
-    box-shadow: 0 0 10px rgba($black,0.2);
+    box-shadow: 0 0 10px rgba(#292929,0.2);
     background-color: $white;
     box-sizing: border-box;
     text-align: center;
@@ -405,14 +437,19 @@ div.contents.row {
 
 .initial {
   display: initial;
+  flex-wrap:initial;
 }
 .user_page {
-  margin: 20px auto;
+  display: inline-block;
   color: white;
   font-family: "ほのか明朝";
 }
 
-
+.user_info {
+  a{
+    color: #9ec34b;
+  }
+}
 
 
  //show画面用
@@ -437,7 +474,7 @@ div.contents_show.row {
     background-size: cover;
     background-position: center center;
     border-radius: 3px;
-    box-shadow: 0 0 10px rgba($black,0.2);
+    box-shadow: 0 0 10px rgba(#292929,0.2);
     &:after {
       content: '';
       position: absolute;
@@ -451,7 +488,7 @@ div.contents_show.row {
       z-index: 1;
       border-radius: 3px;
     }
-
+  
     .text_show {
       z-index: 2;
       position: absolute;
@@ -492,6 +529,7 @@ div.contents_show.row {
           a {
             display: block;
             padding: 5px;
+            color: lightgray;
             &:hover {
               background-color: $accent;
               color: #fff;
@@ -506,14 +544,18 @@ div.contents_show.row {
       @extend .serif;
       position: absolute;
       left: 30px;
-      // right: 100px;
-      // bottom: 30px;
       margin: 0;
       font-size: 20px;
       z-index: 2;
       font-weight: bold;
       text-shadow: 0 0 2px #000, 0 0 1px #000, 0 0 1px #000;
     }
+
+    span.tag {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
     span.name_show {
       position: absolute;
       right: 20px;
@@ -540,7 +582,7 @@ div.contents_show.row {
     margin: 50px auto;
     padding: 120px;
 
-    box-shadow: 0 0 10px rgba($black,0.2);
+    box-shadow: 0 0 10px rgba(#292929,0.2);
     background-color: $white;
     box-sizing: border-box;
     text-align: center;
@@ -549,8 +591,6 @@ div.contents_show.row {
     }
   }
 } //div.content row用 show画面用
-
-
 
 .devise_space {
   padding: 50px;
@@ -561,9 +601,56 @@ div.contents_show.row {
   color: whitesmoke;
 }
 
+.search-bar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  %p.user_page {
+    // margin: 20px auto;
+    display: inline-block;
+    color: white;
+    font-family: "ほのか明朝";
+  }
+  .search-form {
+    display: block;
+    text-align: center;
+    padding-top: 32px;
+    .search-input {
+      // width: 30%;
+      margin-right: 10px;
+    }
+  
+  //   .search-btn {
+  //     width: 10%;
+  //   }
+  }
+}
 
+.my_tag {
+  position: absolute;
+  left: 60px;
+  font-size: 20px;
+}
 
+.last_time {
+  position: absolute;
+  left: 80px;
+  top: 75px;
+  font-size: 20px;
+}
 
+.last_bar {
+  position: absolute;
+  top: 110px;
+  width: 120px;
+  height: 40px;
+  padding-top: 10px;
+  text-align: center;
+  border-top: solid;
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+}
 
 
 form {
@@ -595,7 +682,7 @@ form {
 }
 .container {
   @include boxBase(20px 0 ,30px);
-  box-shadow: 0 0 10px rgba($black,0.2);
+  box-shadow: 0 0 10px rgba(#292929,0.2);
   background-color: $white;
   box-sizing: border-box;
 }
@@ -611,6 +698,18 @@ form {
   }
 }
 
+.fav {
+  display: flex;
+  color: white;
+  a {
+    text-decoration: none;
+    color: white;
+  }
+}
+
+
+
+
 footer {
   @include boxBase;
   color: $gray;
@@ -619,14 +718,15 @@ footer {
   }
 }
 
-<<<<<<< Updated upstream
 .search-form {
   text-align: center;
   padding-top: 32px;
   .search-input {
     width: 30%;
     margin-right: 10px;
-=======
+  }
+} //多分ここ
+
 
 
 
@@ -664,6 +764,113 @@ footer {
 .cp_tab > input:nth-child(11):checked ~ .cp_tabpanels > .cp_tabpanel:nth-child(6) {
   display: block;
   color: white;
+  
+}
+.cp_tab > label {
+	position: relative;
+	display: inline-block;
+	padding: 15px;
+	cursor: pointer;
+	border: 1px solid transparent;
+  border-bottom: 0;
+  color: white;
+}
+.cp_tab > label:hover,
+.cp_tab > input:focus + label {
+	color: #0066cc;
+}
+.cp_tab > input:checked + label {
+	margin-bottom: -1px;
+	border-color: #cccccc;
+	border-bottom: 1px solid #ffffff;/*背景色と同じ*/
+	border-radius: 6px 6px 0 0;
+}
+.cp_tab .cp_tabpanel {
+	padding: 0.5em 1em;
+	border-top: 1px solid #cccccc;
+}
+
+@media (max-width: 480px) {
+	.cp_tab {
+		width: 100%;
+		font-size: 0.8em;
+	}
+	.cp_tab label {
+		padding: 0.5em;
+	}
+}
+
+.content_post-user {
+  margin: 10px;
+  padding: 30px;
+  position: relative;
+  height: 200px;
+  color: #fff;
+  background-size: cover;
+  background-position: center center;
+  border-radius: 3px;
+  box-shadow: 0 0 10px rgba(#292929,0.2);
+  &:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    @include filter-gradient(#000000, #a60000, vertical);
+    @include background-image(linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0) 62%,rgba(0,0,0,0.85) 100%));
+    z-index: 1;
+    border-radius: 3px;
+  }
+
+  .text {
+    z-index: 2;
+    position: absolute;
+    bottom:10px;
+    left: 10px;
+    font-size: 12px;
+    text-transform: lowercase;
+  }
+
+  .tag_index {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+  }
+}
+.cp_tab *, .cp_tab *:before, .cp_tab *:after {
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
+}
+.cp_tab {
+	margin: 1em auto;
+}
+.cp_tab > input[type='radio'] {
+	margin: 0;
+	padding: 0;
+	border: none;
+	border-radius: 0;
+	outline: none;
+	background: none;
+	-webkit-appearance: none;
+	        appearance: none;
+  display: none;
+  
+}
+.cp_tab .cp_tabpanel {
+  display: none;
+  span{
+    color: white;
+  }
+}
+.cp_tab > input:first-child:checked ~ .cp_tabpanels > .cp_tabpanel:first-child,
+.cp_tab > input:nth-child(3):checked ~ .cp_tabpanels > .cp_tabpanel:nth-child(2),
+.cp_tab > input:nth-child(5):checked ~ .cp_tabpanels > .cp_tabpanel:nth-child(3),
+.cp_tab > input:nth-child(7):checked ~ .cp_tabpanels > .cp_tabpanel:nth-child(4),
+.cp_tab > input:nth-child(9):checked ~ .cp_tabpanels > .cp_tabpanel:nth-child(5),
+.cp_tab > input:nth-child(11):checked ~ .cp_tabpanels > .cp_tabpanel:nth-child(6) {
+  display: block;
   
 }
 .cp_tab > label {
@@ -736,17 +943,47 @@ footer {
     position: absolute;
     top: 10px;
     left: 10px;
->>>>>>> Stashed changes
   }
 
-  .search-btn {
-    width: 10%;
+  .more {
+    position: absolute;
+    cursor: pointer;
+    top: 20px;
+    right: 30px;
+    z-index: 2;
+    height: 100px;
+    width: 80px;
+    text-align: right;
+    &:hover ul.more_list {
+      display: block;
+    }
+    ul.more_list {
+      position: absolute;
+      text-align: left;
+      width: 70px;
+      right: 0;
+      font-size: 12px;
+      background-color: #fff;
+      border: 1px solid #ddd;
+      display: none;
+      box-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+      border-radius: 3px;
+      li {
+        border-bottom: 1px solid #ddd;
+        &:last-child {
+          border-bottom: 0;
+        }
+        a {
+          display: block;
+          padding: 5px;
+          &:hover {
+            background-color: $accent;
+            color: #fff;
+          }
+        }
+      }
+    }
   }
-}
-
-<<<<<<< Updated upstream
-=======
-
   p {
     @extend .serif;
     position: absolute;
@@ -779,10 +1016,6 @@ footer {
   }
 }
 
-
-
-
-
 @mixin circle($size) {
   content: "";
   position: absolute;
@@ -792,7 +1025,6 @@ footer {
   width: $size;
   height: $size;
 }
-
 $size: 200px;
 .progress-pie-chart {
   width: $size;
@@ -821,6 +1053,7 @@ $size: 200px;
     }
   }
 }
+
 .ppc-percents {
   @include circle(#{$size/1.15});
   background: #fff;
@@ -833,6 +1066,7 @@ $size: 200px;
     color: #81CE97;
   }
 }
+
 .pcc-percents-wrapper {
   display: table-cell;
   vertical-align: middle;
@@ -842,4 +1076,3 @@ $size: 200px;
 .progress-pie-chart {
   margin: 50px auto 0;
 }
->>>>>>> Stashed changes
