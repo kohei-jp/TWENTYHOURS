@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+<<<<<<< Updated upstream
   devise_for :users
   root  'tops#index'
   namespace :tweets do
@@ -17,4 +18,10 @@ Rails.application.routes.draw do
     get :followers, on: :member # 追加
   end
   #======================================
+=======
+  root "home#index"
+  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
+  root to: 'tweets#index'
+  resources :tweets
+>>>>>>> Stashed changes
 end

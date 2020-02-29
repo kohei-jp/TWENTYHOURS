@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
+<<<<<<< Updated upstream
          :recoverable, :rememberable, :validatable
   has_many :tweets
   has_many :comments
@@ -27,4 +28,32 @@ class User < ApplicationRecord
     # 今自分(引数のuser)がフォローしようとしているユーザー(レシーバー)がフォローされているユーザー(つまりpassive)の中から、引数に渡されたユーザー(自分)がいるかどうかを調べる
     passive_relationships.find_by(following_id: user.id).present?
   end
+=======
+         :recoverable, :rememberable, :validatable, :omniauthable
+         
+  def self.find_for_oauth(auth)
+  user = User.where(uid: auth.uid, provider: auth.provider).first
+
+  unless user
+    user = User.create(
+      uid:      auth.nickname,
+      name:     auth.info.name,
+      image:    auth.info.image,
+      provider: auth.provider,
+      email:    User.dummy_email(auth),
+      password: Devise.friendly_token[0, 20]
+    )
+  end
+  user
+end
+
+private
+
+def self.dummy_email(auth)
+  "#{auth.uid}-#{auth.provider}@example.com"
+end
+     
+
+
+>>>>>>> Stashed changes
 end
