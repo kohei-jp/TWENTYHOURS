@@ -20,7 +20,6 @@
       %br
       = "today:#{@tweet.time}h"
       %br
-      = "残り: #{20 - @tweet.time }[h]"
   .container
     - if current_user
       = form_with(model: [@tweet, @comment], local: true, id: "new_comment") do |form|

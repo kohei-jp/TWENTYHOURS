@@ -16,5 +16,10 @@ Rails.application.routes.draw do
     get :follows, on: :member # 追加
     get :followers, on: :member # 追加
   end
-  #======================================
+  resources :users, only: :show
+
+  get '/auth/:provider/callback', to: 'sessions#create'
+  get '/logout', to: 'sessions#destroy'
+  get '/login', to: 'homes#login'
+
 end
