@@ -26,6 +26,7 @@ class UsersController < ApplicationController
 
     # user = User.find(params[:id]) #follower用
     @follower_users = @user.followers #follower用
+  end
 
 
   def calc_total

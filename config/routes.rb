@@ -13,19 +13,18 @@ Rails.application.routes.draw do
   # ================ここをネスト(入れ子)した形に変更
   resources :users do
     resource :relationships, only: [:create, :destroy]
-    get :follows, on: :member # 追加
-    get :followers, on: :member # 追加
+      get :follows, on: :member # 追加
+      get :followers, on: :member # 追加
   end
 
   #======================================
-  
-  root to: 'tweets#index'
-  resources :tweets
 
-  resources :users, only: :show
+  # root to: 'tweets#index'
+  # resources :tweets
 
-  get '/auth/:provider/callback', to: 'sessions#create'
-  get '/logout', to: 'sessions#destroy'
-  get '/login', to: 'homes#login'
+  # resources :users, only: :show
 
+  # get '/auth/:provider/callback', to: 'sessions#create'
+  # get '/logout', to: 'sessions#destroy'
+  # get '/login', to: 'homes#login'
 end
